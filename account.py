@@ -2,9 +2,9 @@ import mysql.connector
 #import hashlib
 import random
 
-db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
 def createNewAccount(userName,age,address,aadharNo,email,password,mobileNo):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     #password1=hashlib.sha256(password.encode()).hexdigest()
     accountNo=random.randrange(4000000000,6000000000)
     accountNo=str(accountNo)
@@ -17,7 +17,7 @@ def createNewAccount(userName,age,address,aadharNo,email,password,mobileNo):
     return accountNo
 
 def login1(account,password):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     cursor.execute("select u_password from user where account_no=%s"%account)
     realPass=cursor.fetchone()
@@ -28,14 +28,14 @@ def login1(account,password):
     else:return False
 
 def deposit(account,amount):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     cursor.execute("UPDATE balance SET balance=balance+%s WHERE account_no=%s",(int(amount),account))
     db.commit()
     db.close()
 
 def Withdraw(account,amount):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     cursor.execute("SELECT balance from balance where account_no=%s"%account)
     balance=cursor.fetchone()[0]
@@ -47,13 +47,13 @@ def Withdraw(account,amount):
     else:return False
     
 def checkBal(account):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     cursor.execute("SELECT balance from balance WHERE account_no=%s"%account)
     return cursor.fetchone()[0]
 
 def changepassword(account,password,newpassword):
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     try:
         cursor.execute("UPDATE user set u_password=%s where account_no=%s",(newpassword,account))
@@ -65,7 +65,7 @@ def changepassword(account,password,newpassword):
     
 def deleteAcc(account):
     balance=-1
-    db=mysql.connector.connect(host='localhost',user='root',password='preet2005***',database='bank',auth_plugin='mysql_native_password')
+    db=mysql.connector.connect(host='localhost',user='root',password='pass',database='bank',auth_plugin='mysql_native_password')
     cursor=db.cursor()
     cursor.execute("SELECT balance from balance where account_no='%s'"%account)
     balance=cursor.fetchone()[0]
